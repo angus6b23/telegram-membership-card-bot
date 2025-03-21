@@ -7,6 +7,7 @@ import {
 import { BotContext } from "./session-storage";
 import { listCodeController, GetCodeTypes } from "../controllers/list-codes";
 import { startController } from "../controllers/instructions";
+import { deleteCodeController } from "../controllers/delete-code";
 
 export const userCommands = new CommandGroup<BotContext>();
 userCommands.command("add_user", "Admin: Add a new user.", addUserController);
@@ -17,18 +18,25 @@ userCommands.command(
   deleteUserController,
 );
 
-export const codeCommands = new CommandGroup<BotContext>();
-codeCommands.command(
+export const restrictedUserCommands = new CommandGroup<BotContext>();
+restrictedUserCommands.command(
   "list_memberships",
-  "All Users: List all membership codes",
+  "Users: List all membership codes",
   listCodeController(GetCodeTypes.membership),
 );
-codeCommands.command(
+restrictedUserCommands.command(
+  "delete_code",
+  "Users: Delete a code you owned; Admin: Delete any codes",
+  deleteCodeController,
+);
+
+export const regularUserCommands = new CommandGroup<BotContext>();
+regularUserCommands.command(
   "list_gift_cards",
   "User / Admin: List all gift cards",
   listCodeController(GetCodeTypes.giftCard),
 );
-codeCommands.command(
+regularUserCommands.command(
   "list_codes",
   "User / Admin: List all codes",
   listCodeController(GetCodeTypes.all),

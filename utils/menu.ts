@@ -1,7 +1,7 @@
 import { Menu, MenuRange } from "@grammyjs/menu";
 import { BotContext } from "./session-storage";
 import { getCodeController } from "../controllers/get-code";
-import { CodeType } from "./codes-helper";
+import { CodeType, DbCode, deleteCode } from "./codes-helper";
 import { generateCaption } from "./caption-helper";
 import { UserRole } from "./auth-helper";
 import { ManageUserAction } from "../controllers/manage-user";
@@ -33,6 +33,37 @@ listCodeMenu.dynamic((ctx: BotContext) => {
       .text(label, (ctx) => {
         ctx.session.getCode = code;
         getCodeController(ctx);
+      })
+      .row();
+  }
+  return range;
+});
+
+export const confirmMenu = new Menu<BotContext>("confirm-menu")
+  .text("💀 Delete", async (ctx: BotContext) => {
+    if (ctx.session.deleteCode !== undefined) {
+      await deleteCode((ctx.session.deleteCode as DbCode).id);
+      ctx.reply("✅ Code deleted successfully");
+    }
+  })
+  .row()
+  .text("Cancel", async (ctx: BotContext) => {
+    ctx.session.deleteCode = undefined;
+    ctx.reply("Action cancelled");
+  });
+
+export const deleteCodeMenu = new Menu<BotContext>("delete-code-menu");
+deleteCodeMenu.dynamic((ctx: BotContext) => {
+  const range = new MenuRange<BotContext>();
+  const res = ctx.session.listCode;
+  for (const code of res) {
+    const label = generateCaption(code);
+    range
+      .text(label, (ctx) => {
+        ctx.session.deleteCode = code;
+        ctx.reply("❔ Are you sure you want to delete this code", {
+          reply_markup: confirmMenu,
+        });
       })
       .row();
   }

@@ -1,5 +1,10 @@
-import { getRole } from "../utils/auth-helper";
-import { codeCommands, genericCommands, userCommands } from "../utils/commands";
+import { getRole, UserRole } from "../utils/auth-helper";
+import {
+  genericCommands,
+  regularUserCommands,
+  restrictedUserCommands,
+  userCommands,
+} from "../utils/commands";
 import { BotContext } from "../utils/session-storage";
 
 export const startController = async (ctx: BotContext) => {
@@ -11,10 +16,24 @@ export const startController = async (ctx: BotContext) => {
     );
     ctx.setMyCommands(genericCommands as any);
   } else if (role !== -1) {
-    if (role < 2) {
-      ctx.setMyCommands([codeCommands, genericCommands] as any);
-    } else {
-      ctx.setMyCommands([userCommands, codeCommands, genericCommands] as any);
+    switch (role) {
+      case UserRole.RestrictedUser:
+        ctx.setMyCommands([restrictedUserCommands, genericCommands] as any);
+        break;
+      case UserRole.User:
+        ctx.setMyCommands([
+          regularUserCommands,
+          restrictedUserCommands,
+          genericCommands,
+        ] as any);
+        break;
+      case UserRole.Admin:
+        ctx.setMyCommands([
+          userCommands,
+          regularUserCommands,
+          restrictedUserCommands,
+          genericCommands,
+        ] as any);
     }
     ctx.reply(
       "🦭 Welcome to the code bots. Send a photo with codes to save it as membership or gift cards.",

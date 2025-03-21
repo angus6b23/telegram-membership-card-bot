@@ -6,11 +6,22 @@ import {
   addCodeConversation,
   manageUserConversation,
 } from "./utils/conversations";
-import { addCodeMenu, addUserMenu, listCodeMenu } from "./utils/menu";
+import {
+  addCodeMenu,
+  addUserMenu,
+  confirmMenu,
+  deleteCodeMenu,
+  listCodeMenu,
+} from "./utils/menu";
 import { addCodeController } from "./controllers/add-code";
 import { BotContext, initialSessionData } from "./utils/session-storage";
 import { textInputController } from "./controllers/search-code";
-import { codeCommands, genericCommands, userCommands } from "./utils/commands";
+import {
+  genericCommands,
+  regularUserCommands,
+  restrictedUserCommands,
+  userCommands,
+} from "./utils/commands";
 
 // Read bot token from env, exit if not found
 const botToken = process.env.BOT_TOKEN;
@@ -32,10 +43,19 @@ bot.use(createConversation(addCodeConversation, "add-code"));
 bot.use(createConversation(manageUserConversation as any, "manage-user"));
 
 // Menus
-bot.use(addCodeMenu).use(listCodeMenu).use(addUserMenu);
+bot
+  .use(addCodeMenu)
+  .use(listCodeMenu)
+  .use(addUserMenu)
+  .use(confirmMenu)
+  .use(deleteCodeMenu);
 
 // Commands
-bot.use(genericCommands).use(codeCommands).use(userCommands);
+bot
+  .use(genericCommands)
+  .use(userCommands)
+  .use(restrictedUserCommands)
+  .use(regularUserCommands);
 
 // Add Membership code
 bot.on(":photo", addCodeController);

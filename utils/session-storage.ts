@@ -8,16 +8,13 @@ export interface AddCodeStorage {
   content: string;
 }
 
-export type ListCodeStorage = DbCode[];
-
-export type GetCodeStorage = DbCode;
-
 export type MessageIdsStorage = Map<number, number>;
 
 export interface SessionData {
   addCode: AddCodeStorage;
-  listCode: ListCodeStorage;
-  getCode: GetCodeStorage;
+  listCode: DbCode[];
+  getCode: DbCode;
+  deleteCode: DbCode | undefined;
   messageIds: MessageIdsStorage;
   userIdToAdd: number;
 }
@@ -28,10 +25,8 @@ export const initialSessionData = () => ({
     content: "",
   },
   listCode: [],
-  getCode: {
-    type: "",
-    id: 0,
-  },
+  getCode: {},
+  deleteCode: undefined,
   userIdToAdd: 0,
   messageIds: new Map(),
 });

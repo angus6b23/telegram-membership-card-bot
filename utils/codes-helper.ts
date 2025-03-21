@@ -48,6 +48,10 @@ export const listCode = async (type: GetCodeTypes): Promise<DbCode[]> => {
   }
 };
 
+export const listCodeByOwner = async (owner: number): Promise<DbCode[]> => {
+  return await db.all("SELECT * from codes where owner = ?", [owner]);
+};
+
 export const readCode = async (id: number) => {
   const record = await db.get("SELECT * from codes where id = ?", [id]);
   return record as DbCode;
