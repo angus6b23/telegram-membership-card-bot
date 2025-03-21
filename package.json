@@ -1,5 +1,5 @@
 {
-  "name": "telegram-cards-bot",
+  "name": "telegram-membership-cards-bot",
   "main": "index.ts",
   "description": "A telegram bot allows you to save and share membership cards and gift cards with your family or friends",
   "author": "Angus Wan <work@12a.app>",
@@ -28,7 +28,8 @@
   "scripts": {
     "dev": "tsx watch index.ts",
     "start": "tsx index.ts",
-    "test": "NODE_ENV=testing yarn jest"
+    "test": "NODE_ENV=testing yarn jest",
+    "build:docker": "docker build -t telegram-membership-cards-bot ."
   },
   "keywords": [
     "grammy",

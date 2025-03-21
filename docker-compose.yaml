@@ -1,0 +1,9 @@
+services:
+  telegram-bot:
+    image: telegram-membership-cards-bot:latest
+    restart: always
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    container_name: tg-membership-card-bot

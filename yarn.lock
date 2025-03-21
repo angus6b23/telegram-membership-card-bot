@@ -4550,9 +4550,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"telegram-cards-bot@workspace:.":
+"telegram-membership-cards-bot@workspace:.":
   version: 0.0.0-use.local
-  resolution: "telegram-cards-bot@workspace:."
+  resolution: "telegram-membership-cards-bot@workspace:."
   dependencies:
     "@grammyjs/commands": "npm:^1.0.5"
     "@grammyjs/conversations": "npm:^2.0.1"
