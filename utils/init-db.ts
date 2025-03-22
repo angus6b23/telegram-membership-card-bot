@@ -16,6 +16,7 @@ export const openDb = async () => {
     driver: sqlite3.Database,
   });
   await db.migrate({
+    force: true,
     migrationsPath: "./migrations",
   });
   if (process.env.NODE_ENV !== "testing") {
