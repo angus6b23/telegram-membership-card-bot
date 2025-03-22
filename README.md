@@ -1,5 +1,5 @@
 <div align = center>
-  <img src="https://raw.githubusercontent.com/angus6b23/assets/master/assets/logo.png" width="450" height="450" alt="tg-mb-card-bot-logo">
+  <img src="https://raw.githubusercontent.com/angus6b23/telegram-membership-card-bot/master/assets/logo.png" width="450" height="450" alt="tg-mb-card-bot-logo">
 </div>
 
 # Telegram Membership Card Bot
