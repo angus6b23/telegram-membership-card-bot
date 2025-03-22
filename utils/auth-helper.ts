@@ -16,7 +16,7 @@ export const getRole = async (ctx: BotContext) => {
   }
   const record = await db.get("SELECT role FROM users WHERE id = ?", [userId]);
   if (!record) {
-    return -1;
+    return UserRole.Admin;
   } else {
     return record.role as UserRole;
   }

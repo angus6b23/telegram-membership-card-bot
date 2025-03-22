@@ -1088,6 +1088,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/luxon@npm:~3.4.0":
+  version: 3.4.2
+  resolution: "@types/luxon@npm:3.4.2"
+  checksum: 10c0/d835467de3daf7e17ba78b50bb5a14efd94272439ca067990d71332a54b311544459c69623eddd243b511b28d70194c9591a9ee8cf9c038962c965f991affd7e
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 22.13.11
   resolution: "@types/node@npm:22.13.11"
@@ -1721,6 +1728,16 @@ __metadata:
   bin:
     create-jest: bin/create-jest.js
   checksum: 10c0/e7e54c280692470d3398f62a6238fd396327e01c6a0757002833f06d00afc62dd7bfe04ff2b9cd145264460e6b4d1eb8386f2925b7e567f97939843b7b0e812f
+  languageName: node
+  linkType: hard
+
+"cron@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "cron@npm:4.1.0"
+  dependencies:
+    "@types/luxon": "npm:~3.4.0"
+    luxon: "npm:~3.5.0"
+  checksum: 10c0/c0fdd2a62905b790a4bf867f51215884774a39ae08f1b956b110af52c35493f14c186e575dddb9ad64e2242373cbccebf53700fdb5b95b86d9b899bafad16a47
   languageName: node
   linkType: hard
 
@@ -3319,6 +3336,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"luxon@npm:~3.5.0":
+  version: 3.5.0
+  resolution: "luxon@npm:3.5.0"
+  checksum: 10c0/335789bba95077db831ef99894edadeb23023b3eb2137a1b56acd0d290082b691cf793143d69e30bc069ec95f0b49f36419f48e951c68014f19ffe12045e3494
+  languageName: node
+  linkType: hard
+
 "make-dir@npm:^4.0.0":
   version: 4.0.0
   resolution: "make-dir@npm:4.0.0"
@@ -4561,6 +4585,7 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/node": "npm:^22.13.10"
     axios: "npm:^1.8.3"
+    cron: "npm:^4.1.0"
     dotenv: "npm:^16.4.7"
     grammy: "npm:^1.35.0"
     jest: "npm:^29.7.0"

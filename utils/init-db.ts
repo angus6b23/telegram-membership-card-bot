@@ -1,6 +1,7 @@
 import { Database, open } from "sqlite";
 import sqlite3 from "sqlite3";
 import fs from "fs";
+import { writeCode, CodeType } from "./codes-helper";
 
 //Create the DB if not exist
 if (!fs.existsSync("./data/database.db")) {
@@ -30,3 +31,26 @@ export const openDb = async () => {
   }
 };
 openDb();
+
+export const resetDb = async () => {
+  await openDb();
+  await db.migrate({
+    force: true,
+    migrationsPath: "./migrations",
+  });
+  await writeCode({
+    type: CodeType.membership,
+    name: "Some Clubcard",
+    content: "example-qr-code",
+    format: "QRCode",
+    user: 0,
+  });
+  await writeCode({
+    type: CodeType.giftCard,
+    name: "Demo gift card",
+    content: "1234567890",
+    format: "Code128",
+    amount: 100,
+    user: 0,
+  });
+};

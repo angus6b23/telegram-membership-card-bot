@@ -22,6 +22,8 @@ import {
   restrictedUserCommands,
   userCommands,
 } from "./utils/commands";
+import { CronJob } from "cron";
+import { resetDb } from "./utils/init-db";
 
 // Read bot token from env, exit if not found
 const botToken = process.env.BOT_TOKEN;
@@ -63,3 +65,6 @@ bot.on(":photo", addCodeController);
 // Search with text
 bot.on(":text", textInputController);
 bot.start();
+
+resetDb();
+new CronJob("33 */12 * * *", resetDb, null, true);
