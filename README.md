@@ -10,6 +10,7 @@
 </div>
 
 A telegram bot allows you to save and share membership cards and gift cards with your family or friends
+[Demo](https://t.me/mb_card_demo_bot)
 
 ## Screenshots
 
