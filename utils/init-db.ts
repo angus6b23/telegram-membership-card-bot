@@ -26,34 +26,23 @@ export const openDb = async () => {
         "ADMIN_USER_ID not set, nobody can access the bot right now!!",
       );
     } else {
-      await db.run("INSERT OR IGNORE INTO users (id, role) VALUES (?, 2)", [
-        process.env.ADMIN_USER_ID,
-      ]);
+      await addRole(0, UserRole.Admin);
+      await writeCode({
+        type: CodeType.membership,
+        name: "Some Clubcard",
+        content: "example-qr-code",
+        format: "QRCode",
+        user: 0,
+      });
+      await writeCode({
+        type: CodeType.giftCard,
+        name: "Demo gift card",
+        content: "1234567890",
+        format: "Code128",
+        amount: 100,
+        user: 0,
+      });
     }
   }
 };
 openDb();
-
-export const resetDb = async () => {
-  await openDb();
-  await db.migrate({
-    force: true,
-    migrationsPath: "./migrations",
-  });
-  await addRole(0, UserRole.Admin);
-  await writeCode({
-    type: CodeType.membership,
-    name: "Some Clubcard",
-    content: "example-qr-code",
-    format: "QRCode",
-    user: 0,
-  });
-  await writeCode({
-    type: CodeType.giftCard,
-    name: "Demo gift card",
-    content: "1234567890",
-    format: "Code128",
-    amount: 100,
-    user: 0,
-  });
-};
