@@ -11,6 +11,15 @@
 
 A telegram bot allows you to save and share membership cards and gift cards with your family or friends
 
+## Screenshots
+
+[screenshot1](https://raw.githubusercontent.com/angus6b23/telegram-membership-card-bot/master/assets/screenshots/screenshot-1.png)
+[screenshot2](https://raw.githubusercontent.com/angus6b23/telegram-membership-card-bot/master/assets/screenshots/screenshot-2.png)
+[screenshot3](https://raw.githubusercontent.com/angus6b23/telegram-membership-card-bot/master/assets/screenshots/screenshot-3.png)
+[screenshot4](https://raw.githubusercontent.com/angus6b23/telegram-membership-card-bot/master/assets/screenshots/screenshot-4.png)
+[screenshot5](https://raw.githubusercontent.com/angus6b23/telegram-membership-card-bot/master/assets/screenshots/screenshot-5.png)
+[screenshot6](https://raw.githubusercontent.com/angus6b23/telegram-membership-card-bot/master/assets/screenshots/screenshot-6.png)
+
 ## Features
 
 - Save and access your membership card and gift cards anywhere
