@@ -2,6 +2,7 @@ import { Database, open } from "sqlite";
 import sqlite3 from "sqlite3";
 import fs from "fs";
 import { writeCode, CodeType } from "./codes-helper";
+import { addRole, UserRole } from "./auth-helper";
 
 //Create the DB if not exist
 if (!fs.existsSync("./data/database.db")) {
@@ -39,6 +40,7 @@ export const resetDb = async () => {
     force: true,
     migrationsPath: "./migrations",
   });
+  await addRole(0, UserRole.Admin);
   await writeCode({
     type: CodeType.membership,
     name: "Some Clubcard",
