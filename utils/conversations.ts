@@ -34,8 +34,11 @@ export const addCodeConversation = async (
 
   // Ask User to provide amount for gift card
   while (!amount && parameters.type === CodeType.giftCard) {
-    await ctx.reply("Give an amount to the gift card");
+    await ctx.reply(
+      "Give an amount to the gift card.\n Enter c to cancel operation.",
+    );
     const { message } = await conversation.waitFor("message:text");
+    if (message.text.toLowerCase() === "c") return;
     amount = Number(message.text);
   }
 
