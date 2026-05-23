@@ -1,6 +1,7 @@
 import { requireRole, UserRole } from "../utils/auth-helper";
 import { readCode, deleteCode, updateCode } from "../utils/codes-helper";
 import { errorHandler } from "../utils/error-handler";
+import { round } from "../utils/round";
 import { BotContext } from "../utils/session-storage";
 
 interface ModifyCodeData {
@@ -24,7 +25,7 @@ export const modifyCodeAmountController = async (
     } else if (data.amount === 0) {
       newAmount = 0;
     } else {
-      newAmount += data.amount;
+      newAmount = round(newAmount + data.amount);
     }
     if (process.env.AUTO_REMOVE_ZERO_BALANCE && newAmount <= 0) {
       await deleteCode(code.id);

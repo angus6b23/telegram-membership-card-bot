@@ -4,21 +4,22 @@ import { BotContext } from "../utils/session-storage";
 import os from "os";
 import fs from "fs/promises";
 import { generateCaption } from "../utils/caption-helper";
-import { CodeType } from "../utils/codes-helper";
+import { CodeType, readCode } from "../utils/codes-helper";
 import { errorHandler } from "../utils/error-handler";
 import { requireRole, UserRole } from "../utils/auth-helper";
 
 export const getCodeController = async (ctx: BotContext) => {
   try {
-    const { id, format, content, type } = ctx.session.getCode;
+    const { id, type } = ctx.session.getCode;
     if (type === CodeType.membership) {
       await requireRole(ctx, UserRole.RestrictedUser);
     } else if (type === CodeType.giftCard) {
       await requireRole(ctx, UserRole.User);
     }
+    const code = await readCode(id);
     const data = await createCode({
-      format,
-      text: content,
+      format: code.format,
+      text: code.content,
     });
     if (!data) {
       throw new Error("Cannot create code");
@@ -28,7 +29,7 @@ export const getCodeController = async (ctx: BotContext) => {
     const inputFile = new InputFile(path);
 
     const msg = await ctx.replyWithPhoto(inputFile, {
-      caption: generateCaption(ctx.session.getCode),
+      caption: generateCaption(code),
     });
     if (type === CodeType.giftCard) {
       ctx.session.messageIds.set(msg.message_id, id);
